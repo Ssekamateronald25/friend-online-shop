@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | SHANERI SOLE & HER</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- HEADER                                     -->
+    <!-- ========================================== -->
+    <header class="site-header">
+        <div class="brand">
+            <h1>SHANERI SOLE & HER</h1>
+            <p>Heels • Sneakers • Sandals</p>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop</a>
+            <a href="cart.html">Cart 🛒</a>
+        </nav>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- FEEDBACK PAGE                             -->
+    <!-- ========================================== -->
+    <main>
+        <section class="feedback-page">
+            <div class="feedback-header">
+                <p class="eyebrow">💬 YOUR VOICE MATTERS</p>
+                <h2>Share Your Feedback</h2>
+                <p>We'd love to hear about your experience with HER STEP.</p>
+            </div>
+
+            <div class="feedback-container">
+                <!-- Feedback Form -->
+                <div class="feedback-form-wrapper">
+                    <form id="feedback-form">
+                        <label>
+                            Your Name *
+                            <input type="text" id="feedback-name" required placeholder="Enter your full name">
+                        </label>
+
+                        <label>
+                            Email Address <span>(optional)</span>
+                            <input type="email" id="feedback-email" placeholder="your@email.com">
+                        </label>
+
+                        <label>
+                            Phone Number <span>(optional)</span>
+                            <input type="tel" id="feedback-phone" placeholder="0712345678">
+                        </label>
+
+                        <label>
+                            How would you rate your experience? *
+                            <div class="feedback-star-rating" id="feedback-star-rating">
+                                <span class="feedback-star" data-value="1">⭐</span>
+                                <span class="feedback-star" data-value="2">⭐</span>
+                                <span class="feedback-star" data-value="3">⭐</span>
+                                <span class="feedback-star" data-value="4">⭐</span>
+                                <span class="feedback-star" data-value="5">⭐</span>
+                            </div>
+                            <input type="hidden" id="feedback-rating" value="0" required>
+                            <small style="color:#999; display:block; margin-top:5px;">Click on a star to rate</small>
+                        </label>
+
+                        <label>
+                            Category *
+                            <select id="feedback-category" required>
+                                <option value="">Select a category</option>
+                                <option value="Product Quality">Product Quality</option>
+                                <option value="Delivery Service">Delivery Service</option>
+                                <option value="Customer Support">Customer Support</option>
+                                <option value="Website Experience">Website Experience</option>
+                                <option value="General Feedback">General Feedback</option>
+                                <option value="Suggestion">Suggestion</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Your Feedback *
+                            <textarea id="feedback-message" required placeholder="Tell us about your experience... What did you like? What could we improve?"></textarea>
+                        </label>
+
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <button type="submit" class="submit-feedback-btn">Submit Feedback ✨</button>
+                            <button type="reset" class="reset-feedback-btn" style="padding:14px 25px; background:#f0f0f0; color:#222; border:1px solid #ddd; cursor:pointer; border-radius:4px;">Clear</button>
+                        </div>
+                    </form>
+                    <p id="feedback-result" class="feedback-result"></p>
+                </div>
+
+                <!-- Recent Feedback Display -->
+                <div class="feedback-display">
+                    <h3>What Our Customers Say</h3>
+                    <div id="recent-feedback">
+                        <p>Loading feedback...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- FOOTER                                     -->
+    <!-- ========================================== -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>SHANERI SOLE & HER</h2>
+                    <p>Heels • Sneakers • Sandals</p>
+                    <p style="color:#666; font-size:14px;">Walk with purpose. Style with ease.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Shop All</a>
+                    <a href="cart.html">Cart</a>
+                    <a href="feedback.html">Feedback</a>
+                </div>
+                <div class="footer-links">
+                    <h3>Categories</h3>
+                    <a href="products.html?category=Heels">Heels</a>
+                    <a href="products.html?category=Sneakers">Sneakers</a>
+                    <a href="products.html?category=Sandals">Sandals</a>
+                    <a href="products.html?category=Boots">Boots</a>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p>📱 <a href="tel:+256779185846">+256 779 185 846</a></p>
+                    <p>💬 <a href="https://wa.me/256779185846" target="_blank">WhatsApp</a></p>
+                    <p>📧 <a href="mailto:namukasashantari@email.com">namukasashantari@email.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SHANERI SOLE & HER. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256779185846?text=Hello%20SHANERI%20SOLE%20👋%20I%20would%20like%20to%20know%20more%20about%20your%20shoes%20and%20place%20an%20order."
+       target="_blank"
+       class="whatsapp-float">
+        <span class="whatsapp-tooltip">Chat with us 💬</span>
+        <button class="whatsapp-button" type="button">💬</button>
+    </a>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS                                    -->
+    <!-- ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+
+    <script>
+        let selectedFeedbackRating = 0;
+
+        // ==========================================
+        // STAR RATING
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.feedback-star');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    selectedFeedbackRating = parseInt(this.dataset.value);
+                    document.getElementById('feedback-rating').value = selectedFeedbackRating;
+                    
+                    stars.forEach(s => {
+                        s.classList.remove('active');
+                        s.style.opacity = '0.3';
+                    });
+                    stars.forEach(s => {
+                        if (parseInt(s.dataset.value) <= selectedFeedbackRating) {
+                            s.classList.add('active');
+                            s.style.opacity = '1';
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseenter', function() {
+                    const val = parseInt(this.dataset.value);
+                    stars.forEach(s => {
+                        if (parseInt(s.dataset.value) <= val) {
+                            s.style.opacity = '1';
+                        } else {
+                            s.style.opacity = '0.3';
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseleave', function() {
+                    stars.forEach(s => {
+                        if (selectedFeedbackRating > 0 && parseInt(s.dataset.value) <= selectedFeedbackRating) {
+                            s.style.opacity = '1';
+                        } else {
+                            s.style.opacity = '0.3';
+                        }
+                    });
+                });
+            });
+        });
+
+        // ==========================================
+        // LOAD RECENT FEEDBACK
+        // ==========================================
+        async function loadRecentFeedback() {
+            const container = document.getElementById('recent-feedback');
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('feedback')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(6);
+
+                if (error) {
+                    console.error('Error loading feedback:', error);
+                    container.innerHTML = '<p style="color:#999;">Unable to load feedback. Please try again.</p>';
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align:center; padding:30px; color:#999; background:#f9f7f5; border-radius:8px;">
+                            <p>No feedback yet. Be the first to share!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                data.forEach(item => {
+                    const stars = '⭐'.repeat(item.rating || 0);
+                    const date = new Date(item.created_at).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+
+                    const div = document.createElement('div');
+                    div.className = 'feedback-item';
+                    div.style.cssText = 'background:white; border:1px solid #eee; padding:20px; margin-bottom:15px; border-radius:8px;';
+                    
+                    div.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap;">
+                            <strong>${item.name}</strong>
+                            <span style="color:#f5a623; font-size:18px;">${stars}</span>
+                            <span style="color:#999; font-size:12px;">${date}</span>
+                        </div>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px;">
+                            <span style="background:#f0f0f0; padding:2px 12px; font-size:12px; border-radius:12px; color:#666;">${item.category || 'General'}</span>
+                        </div>
+                        <p style="color:#555; line-height:1.6;">${item.message}</p>
+                        ${item.email ? `<p style="color:#999; font-size:12px; margin-top:8px;">📧 ${item.email}</p>` : ''}
+                    `;
+                    
+                    container.appendChild(div);
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                container.innerHTML = '<p style="color:#999;">Unable to load feedback. Please refresh the page.</p>';
+            }
+        }
+
+        // ==========================================
+        // SUBMIT FEEDBACK
+        // ==========================================
+        document.getElementById('feedback-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const messageEl = document.getElementById('feedback-result');
+            
+            // Get form values
+            const name = document.getElementById('feedback-name').value.trim();
+            const email = document.getElementById('feedback-email').value.trim();
+            const phone = document.getElementById('feedback-phone').value.trim();
+            const rating = parseInt(document.getElementById('feedback-rating').value);
+            const category = document.getElementById('feedback-category').value;
+            const message = document.getElementById('feedback-message').value.trim();
+
+            // Validate
+            if (!name) {
+                messageEl.innerHTML = '❌ Please enter your name.';
+                messageEl.style.color = '#b00020';
+                return;
+            }
+
+            if (rating === 0) {
+                messageEl.innerHTML = '❌ Please select a rating.';
+                messageEl.style.color = '#b00020';
+                return;
+            }
+
+            if (!category) {
+                messageEl.innerHTML = '❌ Please select a category.';
+                messageEl.style.color = '#b00020';
+                return;
+            }
+
+            if (!message) {
+                messageEl.innerHTML = '❌ Please write your feedback.';
+                messageEl.style.color = '#b00020';
+                return;
+            }
+
+            messageEl.innerHTML = '⏳ Submitting feedback...';
+            messageEl.style.color = '#222';
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('feedback')
+                    .insert({
+                        name: name,
+                        email: email || null,
+                        phone: phone || null,
+                        rating: rating,
+                        category: category,
+                        message: message
+                    })
+                    .select();
+
+                if (error) {
+                    console.error('Supabase error:', error);
+                    messageEl.innerHTML = '❌ Unable to submit feedback. Please try again.';
+                    messageEl.style.color = '#b00020';
+                    return;
+                }
+
+                messageEl.innerHTML = '✅ Thank you for your feedback! We appreciate your input.';
+                messageEl.style.color = '#008000';
+
+                // Reset form
+                document.getElementById('feedback-form').reset();
+                document.getElementById('feedback-rating').value = 0;
+                document.querySelectorAll('.feedback-star').forEach(s => {
+                    s.classList.remove('active');
+                    s.style.opacity = '0.3';
+                });
+                selectedFeedbackRating = 0;
+
+                // Reload recent feedback
+                await loadRecentFeedback();
+
+                setTimeout(() => {
+                    messageEl.innerHTML = '';
+                }, 5000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                messageEl.innerHTML = '❌ An error occurred. Please try again.';
+                messageEl.style.color = '#b00020';
+            }
+        });
+
+        // ==========================================
+        // START
+        // ==========================================
+        loadRecentFeedback();
+    </script>
+
+</body>
+</html>

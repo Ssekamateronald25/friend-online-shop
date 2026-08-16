@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | SHANERI SOLE & HER</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- HEADER                                     -->
+    <!-- ========================================== -->
+    <header class="site-header">
+        <div class="brand">
+            <h1>SHANERI SOLE & HER</h1>
+            <p>Heels • Sneakers • Sandals</p>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop</a>
+            <a href="cart.html">Cart 🛒</a>
+        </nav>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CHECKOUT PAGE                             -->
+    <!-- ========================================== -->
+    <main>
+        <section class="checkout-page">
+            <div class="checkout-header">
+                <p class="eyebrow">SECURE CHECKOUT</p>
+                <h2>Complete Your Order</h2>
+                <p>Fill in your details to place your order.</p>
+            </div>
+
+            <div class="checkout-layout">
+                <!-- Order Summary -->
+                <div class="checkout-summary">
+                    <h3>Order Summary</h3>
+                    <div id="checkout-items">
+                        <p>Loading your cart...</p>
+                    </div>
+                    <div class="checkout-total">
+                        <span>Total</span>
+                        <strong id="checkout-total">UGX 0</strong>
+                    </div>
+                    <div id="discount-display" style="display:none; text-align:center; color:#2e7d32; margin-top:10px; font-weight:600;">
+                        🎉 You saved 10%!
+                    </div>
+                </div>
+
+                <!-- Customer Form -->
+                <div class="checkout-form">
+                    <h3>Delivery Details</h3>
+                    <form id="checkout-form">
+                        <label>
+                            Full Name *
+                            <input type="text" id="customer-name" required placeholder="e.g. Sarah Mukasa">
+                        </label>
+                        <label>
+                            Phone Number *
+                            <input type="tel" id="customer-phone" required placeholder="e.g. 0712345678">
+                        </label>
+                        <label>
+                            WhatsApp Number <span>(optional)</span>
+                            <input type="tel" id="customer-whatsapp" placeholder="e.g. 0712345678">
+                        </label>
+                        <label>
+                            Delivery Location *
+                            <input type="text" id="delivery-location" required placeholder="e.g. Kampala, Ntinda">
+                        </label>
+
+                        <!-- PAYMENT METHOD -->
+                        <label>
+                            Payment Method *
+                            <select id="payment-method" required>
+                                <option value="">Select payment method...</option>
+                                <option value="50% deposit">50% Deposit + 50% on Delivery</option>
+                                <option value="full upfront">Full Payment Upfront (10% discount)</option>
+                                <option value="pay on delivery">Pay on Delivery</option>
+                            </select>
+                            <small style="color:#777;font-weight:normal;display:block;margin-top:5px;">
+                                💰 Full payment upfront gets a <strong>10% discount</strong>!
+                            </small>
+                        </label>
+
+                        <label>
+                            Additional Notes <span>(optional)</span>
+                            <textarea id="order-notes" placeholder="Any special instructions..."></textarea>
+                        </label>
+
+                        <button type="submit" class="place-order-button">Place Order ✓</button>
+                    </form>
+                    <p id="checkout-message" class="checkout-message"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- FOOTER                                     -->
+    <!-- ========================================== -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>SHANERI SOLE & HER</h2>
+                    <p>Heels • Sneakers • Sandals</p>
+                    <p style="color:#666; font-size:14px;">Walk with purpose. Style with ease.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Shop All</a>
+                    <a href="cart.html">Cart</a>
+                    <a href="feedback.html">Feedback</a>
+                </div>
+                <div class="footer-links">
+                    <h3>Categories</h3>
+                    <a href="products.html?category=Heels">Heels</a>
+                    <a href="products.html?category=Sneakers">Sneakers</a>
+                    <a href="products.html?category=Sandals">Sandals</a>
+                    <a href="products.html?category=Boots">Boots</a>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p>📱 <a href="tel:+256779185846">+256 779 185 846</a></p>
+                    <p>💬 <a href="https://wa.me/256779185846" target="_blank">WhatsApp</a></p>
+                    <p>📧 <a href="mailto:namukasashantari@email.com">namukasashantari@email.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SHANERI SOLE & HER. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256779185846?text=Hello%20SHANERI%20SOLE%20👋%20I%20would%20like%20to%20know%20more%20about%20your%20shoes%20and%20place%20an%20order."
+       target="_blank"
+       class="whatsapp-float">
+        <span class="whatsapp-tooltip">Chat with us 💬</span>
+        <button class="whatsapp-button" type="button">💬</button>
+    </a>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS                                    -->
+    <!-- ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+
+    <script>
+        // ==========================================
+        // LOAD CART ITEMS
+        // ==========================================
+        function loadCartItems() {
+            const container = document.getElementById('checkout-items');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding:20px; color:#999;">
+                        <p>Your cart is empty.</p>
+                        <a href="products.html" style="color:#222; text-decoration:underline;">Continue Shopping</a>
+                    </div>
+                `;
+                document.getElementById('checkout-total').textContent = 'UGX 0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                html += `
+                    <div class="checkout-item" style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid #eee;">
+                        <div>
+                            <strong>${item.name}</strong>
+                            ${item.size ? `<p style="margin-top:3px; color:#777; font-size:13px;">Size: ${item.size}</p>` : ''}
+                            <p style="margin-top:3px; color:#777; font-size:13px;">Qty: ${item.quantity}</p>
+                        </div>
+                        <strong>UGX ${subtotal.toLocaleString()}</strong>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('checkout-total').textContent = `UGX ${total.toLocaleString()}`;
+        }
+
+        // ==========================================
+        // PLACE ORDER WITH PAYMENT
+        // ==========================================
+        document.getElementById('checkout-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const messageEl = document.getElementById('checkout-message');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                messageEl.innerHTML = '❌ Your cart is empty!';
+                messageEl.style.color = '#b00020';
+                return;
+            }
+
+            const customerName = document.getElementById('customer-name').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+            const whatsapp = document.getElementById('customer-whatsapp').value.trim();
+            const deliveryLocation = document.getElementById('delivery-location').value.trim();
+            const notes = document.getElementById('order-notes').value.trim();
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            if (!customerName || !phone || !deliveryLocation) {
+                messageEl.innerHTML = '❌ Please fill in all required fields.';
+                messageEl.style.color = '#b00020';
+                return;
+            }
+
+            if (!paymentMethod) {
+                messageEl.innerHTML = '❌ Please select a payment method.';
+                messageEl.style.color = '#b00020';
+                return;
+            }
+
+            let totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let discount = 0;
+
+            // Apply 10% discount for full upfront payment
+            if (paymentMethod === 'full upfront') {
+                discount = totalAmount * 0.1;
+                totalAmount = totalAmount - discount;
+            }
+
+            // Determine payment status
+            let paymentStatus = 'pending';
+            if (paymentMethod === 'full upfront') {
+                paymentStatus = 'pending_payment'; // Admin will confirm payment
+            } else if (paymentMethod === '50% deposit') {
+                paymentStatus = 'deposit_pending';
+            } else {
+                paymentStatus = 'pay_on_delivery';
+            }
+
+            messageEl.innerHTML = '⏳ Placing your order...';
+            messageEl.style.color = '#222';
+
+            try {
+                // 1. Create order
+                const { data: order, error: orderError } = await supabaseClient
+                    .from('orders')
+                    .insert({
+                        customer_name: customerName,
+                        phone: phone,
+                        whatsapp: whatsapp || null,
+                        delivery_location: deliveryLocation,
+                        notes: notes || null,
+                        total_amount: Math.round(totalAmount),
+                        original_amount: Math.round(totalAmount + discount),
+                        discount: Math.round(discount),
+                        payment_method: paymentMethod,
+                        payment_status: paymentStatus,
+                        status: 'pending'
+                    })
+                    .select()
+                    .single();
+
+                if (orderError) {
+                    console.error('Order error:', orderError);
+                    messageEl.innerHTML = '❌ Unable to place order. Error: ' + orderError.message;
+                    messageEl.style.color = '#b00020';
+                    return;
+                }
+
+                // 2. Add order items
+                for (const item of cart) {
+                    const itemData = {
+                        order_id: order.id,
+                        product_name: item.name,
+                        quantity: item.quantity,
+                        unit_price: item.price
+                    };
+                    
+                    if (item.size) {
+                        itemData.size = item.size;
+                    }
+
+                    const { error: itemError } = await supabaseClient
+                        .from('order_items')
+                        .insert(itemData);
+
+                    if (itemError) {
+                        console.error('Item error:', itemError);
+                    }
+                }
+
+                // 3. Clear cart
+                localStorage.removeItem('cart');
+
+                // 4. Show payment instructions based on payment method
+                let paymentInstructions = '';
+                const depositAmount = Math.round(totalAmount / 2);
+
+                if (paymentMethod === '50% deposit') {
+                    paymentInstructions = `
+                        <div style="background:#fff3e0; padding:20px; border-radius:8px; margin:15px 0; text-align:left;">
+                            <h4 style="margin-bottom:10px;">💳 Payment Instructions</h4>
+                            <p>Please send <strong>50% deposit</strong> (UGX ${depositAmount.toLocaleString()}) via Mobile Money to:</p>
+                            <p style="font-size:20px; font-weight:bold; color:#222;">📱 +256 779 185 846</p>
+                            <p><small>MTN / Airtel Money</small></p>
+                            <p>💬 Send payment confirmation on <a href="https://wa.me/256779185846" target="_blank">WhatsApp</a></p>
+                            <p style="color:#999; font-size:13px; margin-top:5px;">Remaining UGX ${depositAmount.toLocaleString()} will be paid on delivery.</p>
+                            <p style="color:#e65100; font-size:13px; font-weight:600; margin-top:5px;">⚠️ Order will be processed after deposit confirmation.</p>
+                        </div>
+                    `;
+                } else if (paymentMethod === 'full upfront') {
+                    paymentInstructions = `
+                        <div style="background:#e8f5e9; padding:20px; border-radius:8px; margin:15px 0; text-align:left;">
+                            <h4 style="margin-bottom:10px;">💰 Payment Instructions</h4>
+                            <p>🎉 You saved <strong>UGX ${discount.toLocaleString()}</strong> (10% discount!)</p>
+                            <p>Please send full payment (UGX ${totalAmount.toLocaleString()}) via Mobile Money to:</p>
+                            <p style="font-size:20px; font-weight:bold; color:#222;">📱 +256 779 185 846</p>
+                            <p><small>MTN / Airtel Money</small></p>
+                            <p>💬 Send payment confirmation on <a href="https://wa.me/256779185846" target="_blank">WhatsApp</a></p>
+                            <p style="color:#2e7d32; font-size:13px; font-weight:600; margin-top:5px;">✅ Order will be processed after payment confirmation.</p>
+                        </div>
+                    `;
+                } else {
+                    paymentInstructions = `
+                        <div style="background:#e3f2fd; padding:20px; border-radius:8px; margin:15px 0; text-align:left;">
+                            <h4 style="margin-bottom:10px;">🚚 Pay on Delivery</h4>
+                            <p>You will pay <strong>UGX ${totalAmount.toLocaleString()}</strong> when the shoes are delivered.</p>
+                            <p style="color:#999; font-size:13px; margin-top:5px;">⚠️ Please have the exact amount ready on delivery.</p>
+                            <p style="color:#e65100; font-size:13px; font-weight:600; margin-top:5px;">📱 Call us on +256 779 185 846 if you have any questions.</p>
+                        </div>
+                    `;
+                }
+
+                // 5. Show success with payment instructions
+                messageEl.innerHTML = `
+                    <div style="text-align:center; padding:20px;">
+                        <h3 style="color:#008000;">✅ Order Placed Successfully!</h3>
+                        <p style="color:#555; margin:10px 0;">Thank you, ${customerName}!</p>
+                        <p style="color:#777;">Order #${order.id}</p>
+                        ${paymentInstructions}
+                        <a href="products.html" style="display:inline-block; margin-top:15px; padding:12px 25px; background:#222; color:white; text-decoration:none; border-radius:4px;">Continue Shopping</a>
+                    </div>
+                `;
+
+                // Reset form
+                document.getElementById('checkout-form').reset();
+                document.getElementById('checkout-items').innerHTML = '<p>Your order has been placed!</p>';
+                document.getElementById('checkout-total').textContent = 'UGX 0';
+
+            } catch (error) {
+                console.error('Checkout error:', error);
+                messageEl.innerHTML = '❌ An error occurred: ' + error.message;
+                messageEl.style.color = '#b00020';
+            }
+        });
+
+        // ==========================================
+        // START
+        // ==========================================
+        loadCartItems();
+    </script>
+
+</body>
+</html>

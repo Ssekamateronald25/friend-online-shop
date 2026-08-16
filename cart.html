@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Cart | SHANERI SOLE & HER </title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="brand">
+            <h1>SHANERI SOLE & HER </h1>
+            <p>Heels • Sneakers • Sandals</p>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop</a>
+            <a href="cart.html">Cart 🛒</a>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+
+        <section class="cart-header">
+            <p class="eyebrow">YOUR SHOES</p>
+            <h2>Shopping Cart</h2>
+        </section>
+
+        <section id="cart-container" class="cart-container">
+            Loading cart...
+        </section>
+
+        <section id="cart-summary" class="cart-summary">
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- FOOTER                                     -->
+    <!-- ========================================== -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>SHANERI SOLE & HER</h2>
+                    <p>Heels • Sneakers • Sandals</p>
+                    <p style="color:#666; font-size:14px;">Walk with purpose. Style with ease.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Shop All</a>
+                    <a href="cart.html">Cart</a>
+                    <a href="feedback.html">Feedback</a>
+                </div>
+                <div class="footer-links">
+                    <h3>Categories</h3>
+                    <a href="products.html?category=Heels">Heels</a>
+                    <a href="products.html?category=Sneakers">Sneakers</a>
+                    <a href="products.html?category=Sandals">Sandals</a>
+                    <a href="products.html?category=Boots">Boots</a>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p>📱 <a href="tel:+256779185846">+256 779 185 846</a></p>
+                    <p>💬 <a href="https://wa.me/256779185846" target="_blank">WhatsApp</a></p>
+                    <p>📧 <a href="mailto:namukasashantari@email.com">namukasashantari@email.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SHANERI SOLE & HER. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256779185846?text=Hello%20SHANERI%20SOLE%20👋%20I%20would%20like%20to%20know%20more%20about%20your%20shoes%20and%20place%20an%20order."
+       target="_blank"
+       class="whatsapp-float">
+        <span class="whatsapp-tooltip">Chat with us 💬</span>
+        <button class="whatsapp-button" type="button">💬</button>
+    </a>
+    <script>
+        // ==========================================
+        // LOAD CART
+        // ==========================================
+        function loadCart() {
+
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            const container = document.getElementById("cart-container");
+            const summary = document.getElementById("cart-summary");
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <h3>Your cart is empty.</h3>
+                        <p>Discover something beautiful for your next step.</p>
+                        <a href="products.html" class="continue-shopping">SHOP SHOES</a>
+                    </div>
+                `;
+                summary.innerHTML = "";
+                return;
+            }
+
+            container.innerHTML = "";
+
+            let total = 0;
+
+            cart.forEach((item, index) => {
+
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const article = document.createElement("article");
+                article.className = "cart-item";
+
+                const imageHTML = item.image
+                    ? `<img src="${item.image}" alt="${item.name}">`
+                    : `<div class="cart-placeholder">👠</div>`;
+
+                const sizeDisplay = item.size ? `Size: ${item.size}` : '';
+
+                article.innerHTML = `
+                    <div class="cart-image">${imageHTML}</div>
+                    <div class="cart-item-info">
+                        <span class="product-category">Shoe</span>
+                        <h3>${item.name}</h3>
+                        ${sizeDisplay ? `<p>${sizeDisplay}</p>` : ''}
+                        <div class="cart-quantity">
+                            <button class="qty-btn minus-btn" data-index="${index}">−</button>
+                            <span class="qty-number">${item.quantity}</span>
+                            <button class="qty-btn plus-btn" data-index="${index}">+</button>
+                        </div>
+                        <strong>UGX ${itemTotal.toLocaleString()}</strong>
+                        <button class="remove-item" data-index="${index}">Remove</button>
+                    </div>
+                `;
+
+                container.appendChild(article);
+            });
+
+            // Update summary
+            summary.innerHTML = `
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong>UGX ${total.toLocaleString()}</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span style="color:#777; font-size:14px;">Calculated at checkout</span>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong>UGX ${total.toLocaleString()}</strong>
+                </div>
+                <p class="delivery-note">Delivery charges will be confirmed when your order is placed.</p>
+                <a href="checkout.html" class="checkout-button">PROCEED TO CHECKOUT</a>
+            `;
+
+            // ==========================================
+            // REMOVE ITEM
+            // ==========================================
+            document.querySelectorAll(".remove-item").forEach(button => {
+                button.addEventListener("click", () => {
+                    const index = Number(button.dataset.index);
+                    cart.splice(index, 1);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    loadCart();
+                });
+            });
+
+            // ==========================================
+            // UPDATE QUANTITY
+            // ==========================================
+            // Minus button
+            document.querySelectorAll(".minus-btn").forEach(button => {
+                button.addEventListener("click", () => {
+                    const index = Number(button.dataset.index);
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity--;
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        loadCart();
+                    }
+                });
+            });
+
+            // Plus button
+            document.querySelectorAll(".plus-btn").forEach(button => {
+                button.addEventListener("click", () => {
+                    const index = Number(button.dataset.index);
+                    if (cart[index].quantity < 10) {
+                        cart[index].quantity++;
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        loadCart();
+                    }
+                });
+            });
+        }
+
+        // Load cart on page load
+        loadCart();
+    </script>
+
+</body>
+
+</html>
